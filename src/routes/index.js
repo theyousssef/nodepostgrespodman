@@ -9,7 +9,6 @@ const cnt ={
   password: process.env.DBPASS,
   port: 5432,
 }
-const client = new Client(cnt)
 
 
 /* GET home page. */
@@ -19,6 +18,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/createDB',async (req,res)=>{
+	const client = new Client(cnt)
         await client.connect()
 	const result = await client.query('CREATE DATABASE '+ process.env.DBNAME)
 	await client.end()
@@ -27,6 +27,7 @@ router.get('/createDB',async (req,res)=>{
 });
 
 router.get('/showDBs', async (req,res)=>{
+	const client = new Client(cnt)
         await client.connect()
         const result = await client.query('SELECT datname FROM pg_database;')
 	await client.end()
@@ -41,10 +42,10 @@ const cnt2 ={
   password: process.env.DBPASS,
   port: 5432,
 }
-const client2 = new Client(cnt2)
 
 
 router.get('/createTable',async (req,res)=>{
+	const client2 = new Client(cnt2)
 	await client2.connect()
 	 const result = await client2.query(`
          CREATE TABLE USERS(
@@ -58,6 +59,7 @@ router.get('/createTable',async (req,res)=>{
 
 
 router.get('/createUsers',async (req,res)=>{
+	const client2 = new Client(cnt2)
         await client2.connect()
          const result = await client2.query(`
          insert into users (id, name) values (11111, 'ucf'),(222222,'youssef')`)
@@ -69,6 +71,7 @@ router.get('/createUsers',async (req,res)=>{
 
 
 router.get('/getUsers',async (req,res)=>{
+	const client2 = new Client(cnt2)
         await client2.connect()
          const result = await client2.query(`
          select id,name from users`)
@@ -82,6 +85,7 @@ router.get('/getUsers',async (req,res)=>{
 
 router.get('/test',async (req,res)=>{
 	//res.send(process.env.HOSTNAME);
+	const client = new Client(cnt)
 	await client.connect()
 	const result = await client.query('SELECT $1::text as message', ['Hello world!'])
 	console.log(result.rows[0].message) // Hello world!

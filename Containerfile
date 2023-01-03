@@ -1,6 +1,6 @@
 #FROM registry.redhat.io/ubi8/nodejs-16
-FROM docker.io/library/node:16
-
+#FROM docker.io/library/node:16
+FROM registry.redhat.io/rhel9/nodejs-16
 #apparently we will need to install node.js inside the container ourselves, or look for a better builder image for node 16
 
 #copy the files and unzip
@@ -13,10 +13,12 @@ FROM docker.io/library/node:16
 
 #USER ucfx
 
-RUN mkdir -p /app/nodepg && \
-    chown -R node /app/nodepg
+user root
 
-USER node
+RUN mkdir -p /app/nodepg 
+#    chown -R node /app/nodepg
+
+#USER node
 
 WORKDIR /app/nodepg/
 
@@ -33,6 +35,9 @@ ENV DBPASS=100101
 
 #navigate to the source code folder
 #install the needed packages
+
+#expose port 3333
+EXPOSE 3333
 
 #run the app
 ENTRYPOINT npm start
