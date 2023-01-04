@@ -10,6 +10,7 @@ const cnt ={
   port: 5432,
 }
 
+console.log("dbhost is " + cnt.host + "\n dbname is " + process.env.DBNAME)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
