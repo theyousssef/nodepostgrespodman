@@ -15,7 +15,9 @@ FROM registry.redhat.io/rhel9/nodejs-16
 
 user root
 
-RUN mkdir -p /app/nodepg 
+RUN mkdir -p /app/nodepg && \
+    yum install -y iputils && \ 
+    yum clean all 
 #    chown -R node /app/nodepg
 
 #USER node
