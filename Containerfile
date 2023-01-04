@@ -22,10 +22,11 @@ RUN mkdir -p /app/nodepg
 
 WORKDIR /app/nodepg/
 
-ADD np.zip .
+#ADD np.zip .
 
-RUN unzip np.zip && \
-    npm install
+#RUN unzip np.zip && \
+ADD src /app/nodepg
+RUN npm install
 
 #create environment variables
 ENV DBUSER=postgres
