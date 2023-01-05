@@ -17,6 +17,7 @@ user root
 
 RUN mkdir -p /app/nodepg && \
     yum install -y iputils && \ 
+    yum install -y telnet && \
     yum clean all 
 #    chown -R node /app/nodepg
 
